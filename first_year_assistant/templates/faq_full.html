@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <section class="faq-full-section">
+
+        <h2 class="faq-full-title">📘 Полный список вопросов и ответов</h2>
+
+        <div class="faq-full-list">
+            {% for item in faq %}
+            <div class="faq-full-card">
+                <div class="faq-full-number">{{ loop.index }}</div>
+                <div class="faq-full-content">
+                    <div class="faq-full-question">Вопрос: {{ item.question }}</div>
+                    <div class="faq-full-answer">Ответ: {{ item.answer | safe }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+</div>
+{% endblock %}
