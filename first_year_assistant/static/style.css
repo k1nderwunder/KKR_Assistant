@@ -113,25 +113,16 @@ footer {
     pointer-events: none;
 }
 
-/* Информация */
-.building-info {
-    margin-top: 20px;
-    padding: 12px;
-    background: #ecf0f1;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 18px;
-}
-
 /* Кнопки фильтров */
 .map-filters {
     display: flex;
-    justify-content: center;   /* вот это делает центр */
+    justify-content: center;
     align-items: center;
     gap: 10px;
     margin: 20px auto;
     flex-wrap: wrap;
 }
+
 .filter-btn {
     padding: 10px 20px;
     border-radius: 25px;
@@ -150,6 +141,44 @@ footer {
 
 .filter-btn.active {
     background: #3498db;
+}
+
+/* ==== ВСПЛЫВАЮЩЕЕ ОКНО ДЛЯ ЗДАНИЙ ==== */
+.building-popup {
+    position: absolute;
+    max-width: 260px;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    font-size: 14px;
+    z-index: 1000;
+    border: 1px solid #dfe6e9;
+}
+
+.building-popup b {
+    font-size: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Кнопка-ссылка внутри попапа */
+.popup-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #3498db;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.popup-btn:hover {
+    background: #2176b9;
 }
 
 /* =========================================================
