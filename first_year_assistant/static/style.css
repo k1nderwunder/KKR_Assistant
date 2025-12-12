@@ -226,7 +226,6 @@ footer {
     background: #ecf0f1;
 }
 
-
 /* ==== CHAT ==== */
 .chat-section {
     margin-top: 40px;
@@ -236,7 +235,6 @@ footer {
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 /* ==== FAQ ==== */
 .faq-section h2 {
@@ -260,7 +258,6 @@ footer {
 .faq-more-button:hover {
     background: #2980b9;
 }
-
 
 /* ==== ПОЛЕЗНЫЕ ССЫЛКИ ==== */
 .links-section h2 {
@@ -369,12 +366,14 @@ footer {
     margin-bottom: 25px;
 }
 
+/* Был flex-список — оставляем, но когда подключена .faq-grid, grid перекроет display */
 .faq-full-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* БАЗОВАЯ карточка (ниже есть финальная версия для полного FAQ) */
 .faq-full-card {
     display: flex;
     gap: 15px;
@@ -433,6 +432,7 @@ footer {
 
 .link-icon { font-size: 26px; }
 .link-name { font-size: 18px; }
+
 /* Поисковая строка FAQ (полный список) */
 .faq-search {
     max-width: 600px;
@@ -461,12 +461,13 @@ footer {
     color: #777;
     font-size: 15px;
 }
+
 /* Поиск FAQ */
 .faq-search-wrapper {
     display: flex;
     gap: 10px;
     max-width: 700px;
-    margin: 0 auto 20px;
+    margin: 0 auto 25px;
 }
 
 .faq-search-wrapper input {
@@ -505,8 +506,15 @@ footer {
     }
 }
 
-/* Карточка FAQ */
+/* =========================================================
+   FAQ: улучшенная читаемость ответов (сетку НЕ трогаем)
+   ========================================================= */
+
+/* Карточка FAQ (финальная версия) */
 .faq-full-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     background: white;
     border-radius: 12px;
     padding: 20px;
@@ -515,47 +523,63 @@ footer {
 
 /* Вопрос */
 .faq-full-question {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0;
 }
 
-/* Ответ */
+/* Ответ — читаемость + оформление */
 .faq-full-answer {
-    font-size: 15px;
-    color: #555;
-}
-
-/* Поиск */
-.faq-search-wrapper {
-    display: flex;
-    gap: 10px;
-    max-width: 700px;
-    margin: 0 auto 25px;
-}
-
-.faq-search-wrapper input {
-    flex: 1;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid #ccd3de;
     font-size: 16px;
+    line-height: 1.75;
+    color: #3d3d3d;
+    background: #f7f9fc;
+    border: 1px solid #e7eef7;
+    border-radius: 10px;
+    padding: 14px 16px;
 }
 
-.faq-clear-btn {
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: none;
-    background: #e74c3c;
-    color: white;
-    cursor: pointer;
+/* Отступы внутри ответа */
+.faq-full-answer p { margin: 0 0 10px 0; }
+.faq-full-answer p:last-child { margin-bottom: 0; }
+
+.faq-full-answer ul,
+.faq-full-answer ol { margin: 8px 0 10px 22px; }
+
+.faq-full-answer li { margin: 6px 0; }
+
+/* Подзаголовки внутри ответа (если есть) */
+.faq-full-answer h3,
+.faq-full-answer h4 {
+    margin: 10px 0 8px;
+    line-height: 1.3;
 }
 
-.faq-clear-btn:hover {
-    background: #c0392b;
+/* Ссылки в ответах */
+.faq-full-answer a {
+    color: #2176b9;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.faq-full-answer a:hover {
+    color: #185a8d;
 }
 
-/* Нет результатов */
+/* Код/преформатированный текст в ответах */
+.faq-full-answer code {
+    background: rgba(0,0,0,0.06);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+.faq-full-answer pre {
+    background: rgba(0,0,0,0.06);
+    padding: 12px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+/* Нет результатов (финальная версия, совпадает по смыслу) */
 .faq-no-results {
     text-align: center;
     color: #777;
