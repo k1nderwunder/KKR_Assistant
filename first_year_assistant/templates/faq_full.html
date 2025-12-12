@@ -5,16 +5,39 @@
 
     <section class="faq-full-section">
 
-        <h2 class="faq-full-title"> Полный список вопросов и ответов</h2>
+        <h2 class="faq-full-title">Полный список вопросов и ответов</h2>
 
-        <div class="faq-full-list">
+        <!-- ПОИСК + ОЧИСТКА -->
+        <div class="faq-search-wrapper">
+            <input
+                type="text"
+                id="faq-search-input"
+                placeholder="Введите вопрос или ключевые слова..."
+                autocomplete="off"
+            >
+            <button id="faq-clear-btn" class="faq-clear-btn">
+                Очистить
+            </button>
+        </div>
+
+        <!-- ЕСЛИ НИЧЕГО НЕ НАЙДЕНО -->
+        <div id="faq-no-results" class="faq-no-results">
+            Ничего не найдено. Попробуйте изменить запрос.
+        </div>
+
+        <!-- СПИСОК ВОПРОСОВ -->
+        <div class="faq-full-list faq-grid" id="faq-full-list">
             {% for item in faq %}
-            <div class="faq-full-card">
-                <div class="faq-full-number">{{ loop.index }}</div>
-                <div class="faq-full-content">
-                    <div class="faq-full-question">Вопрос: {{ item.question }}</div>
-                    <div class="faq-full-answer">Ответ: {{ item.answer | safe }}</div>
+            <div class="faq-full-card" data-faq-card>
+
+                <div class="faq-full-question">
+                    {{ item.question }}
                 </div>
+
+                <div class="faq-full-answer">
+                    {{ item.answer | safe }}
+                </div>
+
             </div>
             {% endfor %}
         </div>
@@ -22,4 +45,58 @@
     </section>
 
 </div>
+
+<!-- JS: ПОИСК -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("faq-search-input");
+    const clearBtn = document.getElementById("faq-clear-btn");
+    const cards = document.querySelectorAll("[data-faq-card]");
+    const noResults = document.getElementById("faq-no-results");
+
+    noResults.style.display = "none";
+
+    function normalize(text) {
+        return text
+            .toLowerCase()
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
+    function filterFaq() {
+        const query = normalize(input.value);
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const text = normalize(card.innerText);
+
+            if (query === "" || text.includes(query)) {
+                card.style.display = "";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        noResults.style.display =
+            (visibleCount === 0 && query !== "") ? "block" : "none";
+    }
+
+    input.addEventListener("input", filterFaq);
+
+    clearBtn.addEventListener("click", function () {
+        input.value = "";
+        noResults.style.display = "none";
+
+        cards.forEach(card => {
+            card.style.display = "";
+        });
+
+        input.focus();
+    });
+
+});
+</script>
+
 {% endblock %}
