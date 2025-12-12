@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterBtns = document.querySelectorAll(".filter-btn");
     const mapWrapper = document.querySelector(".map-wrapper");
     const popup = document.getElementById("building-popup");
+    const overlay = document.getElementById("popup-overlay");
 
     function applyAllMode() {
         buildings.forEach(b => {
@@ -14,6 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearAllMode() {
         buildings.forEach(b => b.classList.remove("all-active"));
     }
+
+    function openPopup() {
+    overlay.classList.remove("hidden");
+    popup.classList.remove("hidden");
+    requestAnimationFrame(() => popup.classList.add("is-open"));
+    }
+
+    function closePopup() {
+        popup.classList.remove("is-open");
+        overlay.classList.add("hidden");
+         setTimeout(() => popup.classList.add("hidden"), 220);
+    }   
+
+    overlay.addEventListener("click", closePopup);
+    popup.addEventListener("click", (e) => {
+    if (e.target.classList.contains("popup-close")) {
+        e.stopPropagation();
+        closePopup();
+        }
+    });
+
 
     // Клик по зданию — показываем попап рядом с объектом
     buildings.forEach(b => {
@@ -58,8 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     `;
                 }
 
-                popup.innerHTML = html;
-                popup.classList.remove("hidden");
+                popup.innerHTML = `
+                <button class="popup-close" type="button" aria-label="Закрыть">×</button>
+                ${html}
+                `;
+                openPopup();
 
                 // Не даём клику всплыть до wrapper'а
                 e.stopPropagation();
@@ -101,15 +126,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mapWrapper && popup) {
         mapWrapper.addEventListener("click", (e) => {
             if (!e.target.classList.contains("building") && !popup.contains(e.target)) {
-                popup.classList.add("hidden");
+                closePopup();
             }
         });
 
         // Клик вне карты — тоже закрываем
         document.addEventListener("click", (e) => {
             if (!mapWrapper.contains(e.target)) {
-                popup.classList.add("hidden");
+                closePopup();
             }
         });
     }
 });
+
