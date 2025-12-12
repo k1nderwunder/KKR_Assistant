@@ -1,0 +1,563 @@
+/* =========================================================
+   ОБЩИЕ СТИЛИ САЙТА
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background: white;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #2c3e50;
+    color: white;
+    margin-top: 2rem;
+}
+
+/* === КАРТА === */
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1536px;
+    aspect-ratio: 1536 / 1024;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-bg {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: block;
+}
+
+/* PNG-здания */
+.building {
+    position: absolute;
+    cursor: pointer;
+    transform-origin: center;
+    pointer-events: auto;
+    transform: scale(1.0);
+    transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+
+/* Эффект для ВСЕХ зданий в режиме "Все объекты" */
+.building.all-active {
+    transform: scale(1.00);
+}
+
+/* Ховер — когда все объекты */
+.building.all-active:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(0, 140, 255, 0.9));
+}
+
+/* Ховер */
+.building:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(0, 140, 255, 0.9));
+}
+
+/* При фильтрации */
+.building.dimmed {
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Кнопки фильтров */
+.map-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    background: #7f8c8d;
+}
+
+.filter-btn.active {
+    background: #3498db;
+}
+
+/* ==== ВСПЛЫВАЮЩЕЕ ОКНО ДЛЯ ЗДАНИЙ ==== */
+.building-popup {
+    position: absolute;
+    max-width: 260px;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    font-size: 14px;
+    z-index: 1000;
+    border: 1px solid #dfe6e9;
+}
+
+.building-popup b {
+    font-size: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Кнопка-ссылка внутри попапа */
+.popup-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #3498db;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+.popup-btn:hover {
+    background: #2176b9;
+}
+
+/* =========================================================
+   АДАПТИВНОСТЬ
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .map-wrapper {
+        max-width: 100%;
+    }
+}
+
+/* ==== ГЕРОЙ-СЕКЦИЯ ==== */
+.hero-section {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 50px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.hero-section p {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-size: 18px;
+}
+
+.hero-button {
+    background: white;
+    color: #2c3e50;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    background: #ecf0f1;
+}
+
+
+/* ==== CHAT ==== */
+.chat-section {
+    margin-top: 40px;
+}
+
+.chat-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+/* ==== FAQ ==== */
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.faq-more-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.faq-more-button {
+    background: #3498db;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.faq-more-button:hover {
+    background: #2980b9;
+}
+
+
+/* ==== ПОЛЕЗНЫЕ ССЫЛКИ ==== */
+.links-section h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* ==== HERO FIX ==== */
+.hero-section h1 { margin-top: 0; }
+
+/* ==== ЧАТ С АССИСТЕНТОМ ==== */
+.chat-box {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.assistant-avatar img {
+    width: 80px;
+    height: 80px;
+}
+
+.chat-right {
+    flex: 1;
+}
+
+.chat-messages {
+    height: 280px;
+    overflow-y: auto;
+    background: #f7f9fc;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e3e9f1;
+}
+
+.input-area {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #bcc7d6;
+    font-size: 16px;
+}
+
+.input-area button {
+    padding: 14px 20px;
+    background: #3498db;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.input-area button:hover {
+    background: #2980b9;
+}
+
+/* ==== FAQ PREVIEW ==== */
+.faq-preview {
+    display: grid;
+    gap: 15px;
+}
+
+.faq-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 6px solid #3498db;
+    transition: 0.2s;
+}
+
+.faq-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.faq-card-q {
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.faq-card-a {
+    font-size: 15px;
+    color: #555;
+}
+
+/* ==== ПОЛНЫЙ FAQ ==== */
+
+.faq-full-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.faq-full-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-full-card {
+    display: flex;
+    gap: 15px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.faq-full-number {
+    font-size: 26px;
+    font-weight: bold;
+    color: #3498db;
+    min-width: 40px;
+    text-align: center;
+}
+
+.faq-full-content {
+    flex: 1;
+}
+
+.faq-full-question {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.faq-full-answer {
+    font-size: 16px;
+    color: #555;
+}
+
+/* ==== LINKS ==== */
+.link-cards {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.25s;
+}
+
+.link-card:hover {
+    background: #2980b9;
+    transform: translateY(-3px);
+}
+
+.link-icon { font-size: 26px; }
+.link-name { font-size: 18px; }
+/* Поисковая строка FAQ (полный список) */
+.faq-search {
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.faq-search input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccd3de;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.faq-search input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
+}
+
+/* Сообщение, когда по фильтру ничего не найдено */
+.faq-no-results {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #777;
+    font-size: 15px;
+}
+/* Поиск FAQ */
+.faq-search-wrapper {
+    display: flex;
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.faq-search-wrapper input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccd3de;
+    font-size: 16px;
+}
+
+.faq-clear-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #e74c3c;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.faq-clear-btn:hover {
+    background: #c0392b;
+}
+
+/* Сетка FAQ: 2 карточки в строке */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Адаптив: на мобильных — 1 в строке */
+@media (max-width: 768px) {
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Карточка FAQ */
+.faq-full-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Вопрос */
+.faq-full-question {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Ответ */
+.faq-full-answer {
+    font-size: 15px;
+    color: #555;
+}
+
+/* Поиск */
+.faq-search-wrapper {
+    display: flex;
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto 25px;
+}
+
+.faq-search-wrapper input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccd3de;
+    font-size: 16px;
+}
+
+.faq-clear-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #e74c3c;
+    color: white;
+    cursor: pointer;
+}
+
+.faq-clear-btn:hover {
+    background: #c0392b;
+}
+
+/* Нет результатов */
+.faq-no-results {
+    text-align: center;
+    color: #777;
+    margin-bottom: 15px;
+}
